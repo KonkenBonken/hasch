@@ -19,10 +19,13 @@ npm i hasch
 ```ts
 import hasch from 'hasch'
 
-hasch(new Uint8Array(123)) // 46947589
-hasch('abc')               // 852579327
-hasch(123)                 // 286822908
-hasch(Buffer.alloc(5))     // 311775565
+hasch(new Uint8Array(123))  // 1794723560
+hasch('abc')                // 852579327
+hasch(123)                  // 286822908
+hasch(Buffer.alloc(5))      // 311775565
+
+hasch('abc', { seed: 123 }) // 2274156986 
+hasch('abc', { seed: 246 }) // 2420894577
 ```
 
 ## Author

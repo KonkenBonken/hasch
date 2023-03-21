@@ -1,6 +1,11 @@
 import xxh32 from 'xxh32';
 
-export function hasch(input: Uint8Array | string | number | Buffer) {
+export function hasch(
+  input: Uint8Array | string | number | Buffer,
+  {
+    seed = 0
+  } = {}
+) {
   if (typeof input === 'string')
     input = new TextEncoder().encode(input);
 
@@ -10,7 +15,7 @@ export function hasch(input: Uint8Array | string | number | Buffer) {
   else if (Buffer.isBuffer(input))
     input = new Uint8Array(input);
 
-  return xxh32(input);
+  return xxh32(input, seed);
 }
 
 export default hasch;
