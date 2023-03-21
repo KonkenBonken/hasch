@@ -1,0 +1,44 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "root": true,
+  "rules": {
+    "import/no-anonymous-default-export": "off",
+    "semi": "warn",
+    "semi-spacing": "warn",
+    "semi-style": "warn",
+    "space-before-blocks": "warn",
+    "space-in-parens": "warn",
+    "max-statements-per-line": "warn",
+    "no-var": "off",
+    "eol-last": [
+      "warn",
+      "always"
+    ],
+    "space-before-function-paren": [
+      "warn",
+      "never"
+    ],
+    "array-element-newline": [
+      "warn",
+      "consistent"
+    ],
+    "brace-style": [
+      "warn",
+      "stroustrup",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "comma-dangle": [
+      "warn",
+      {
+        "arrays": "only-multiline",
+        "objects": "only-multiline"
+      }
+    ]
+  }
+}
