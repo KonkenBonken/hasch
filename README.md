@@ -22,6 +22,7 @@ import hasch from 'hasch'
 hasch(new Uint8Array(123)) // 46947589
 hasch('abc')               // 852579327
 hasch(123)                 // 286822908
+hasch(Buffer.alloc(5))     // 311775565
 ```
 
 ## Author
