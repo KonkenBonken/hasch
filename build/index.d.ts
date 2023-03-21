@@ -1,2 +1,2 @@
-export declare function hasch(uint8Arr: Uint8Array): number;
+export declare function hasch(input: Uint8Array | string): number;
 export default hasch;

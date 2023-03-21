@@ -20,6 +20,7 @@ npm i hasch
 import hasch from 'hasch'
 
 hasch(new Uint8Array(123)) // 46947589
+hasch('abc')               // 852579327
 ```
 
 ## Author

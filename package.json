@@ -1,6 +1,6 @@
 {
   "name": "hasch",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple and versatile hash function",
   "main": "build/index.js",
   "files": [
