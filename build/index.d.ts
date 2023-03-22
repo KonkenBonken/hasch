@@ -1,5 +1,13 @@
 /// <reference types="node" resolution-mode="require"/>
-export declare function hasch(input: Uint8Array | string | number | Buffer, { seed }?: {
-    seed?: number | undefined;
+type Input = Uint8Array | string | number | Buffer;
+interface Options {
+    seed?: number;
+    base?: number;
+}
+export declare function hasch(input: Input, options?: Options & {
+    base?: 0;
 }): number;
+export declare function hasch(input: Input, options: Options & {
+    base: number;
+}): string;
 export default hasch;
