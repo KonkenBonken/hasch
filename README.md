@@ -19,19 +19,19 @@ npm i hasch
 ```ts
 import hasch from 'hasch'
 
-hasch(new Uint8Array(123))             // 1794723560
-hasch('abc')                           // 852579327
-hasch(123)                             // 286822908
-hasch(Buffer.alloc(5))                 // 311775565
+hasch(new Uint8Array(123))             === 1794723560
+hasch('abc')                           === 852579327
+hasch(123)                             === 286822908
+hasch(Buffer.alloc(5))                 === 311775565
 
-hasch('abc', { seed: 123 })            // 2274156986 
-hasch('abc', { seed: 246 })            // 2420894577
+hasch('abc', { seed: 123 })            === 2274156986 
+hasch('abc', { seed: 246 })            === 2420894577
 
-hasch('abc', { base: 0 })              // 852579327
-hasch('abc', { base: 2 })              // "110010110100010101001111111111"
-hasch('abc', { base: 3 })              // "2012102021111222010"
-hasch('abc', { base: 36 })             // "e3lqf3"
-hasch('abc', { base: 36, seed: 1000 }) // "wl0nhd"
+hasch('abc', { base: 0 })              === 852579327
+hasch('abc', { base: 2 })              === "110010110100010101001111111111"
+hasch('abc', { base: 3 })              === "2012102021111222010"
+hasch('abc', { base: 36 })             === "e3lqf3"
+hasch('abc', { base: 36, seed: 1000 }) === "wl0nhd"
 ```
 
 ## Author
