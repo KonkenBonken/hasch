@@ -32,6 +32,12 @@ hasch('abc', { base: 2 })              === "110010110100010101001111111111"
 hasch('abc', { base: 3 })              === "2012102021111222010"
 hasch('abc', { base: 36 })             === "e3lqf3"
 hasch('abc', { base: 36, seed: 1000 }) === "wl0nhd"
+
+hasch('abc', { base: 36, length: 1 })  === "e"
+hasch('abc', { base: 36, length: 6 })  === "e3lqf3"
+hasch('abc', { base: 36, length: 10 }) === "0000e3lqf3"
+hasch('abc', { base: 36, length: 16 }) === "0000000000e3lqf3"
+
 ```
 
 ## Author

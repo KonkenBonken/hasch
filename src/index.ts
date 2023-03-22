@@ -8,19 +8,28 @@ type UnionRange<
 > =
   (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>)
 
-interface Options {
+export function hasch(input: Input, options?: {
   seed?: number
-  base?: UnionRange
-}
+  base?: 0
+}): number;
 
-export function hasch(input: Input, options?: Options & { base?: 0 }): number;
-export function hasch(input: Input, options: Options & { base: Exclude<UnionRange, 0> }): string;
+export function hasch(input: Input, options: {
+  seed?: number
+  base: Exclude<UnionRange, 0>
+  length?: number
+}): string;
+
 export function hasch(
   input: Input,
   {
     seed = 0,
-    base = 0
-  }: Options = {}
+    base = 0,
+    length
+  }: {
+    seed?: number
+    base?: number
+    length?: number
+  } = {}
 ) {
   if (typeof input === 'string')
     input = new TextEncoder().encode(input);
@@ -33,8 +42,12 @@ export function hasch(
 
   const hash = xxh32(input, seed);
 
-  if (base !== 0)
-    return hash.toString(base);
+  if (base !== 0) {
+    let str = hash.toString(base);
+    if (length !== undefined)
+      str = str.padStart(length, '0').slice(0, length);
+    return str;
+  }
 
   return hash;
 }
