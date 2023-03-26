@@ -1,6 +1,6 @@
-import xxh32 from 'xxh32';
+import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
-type Input = Uint8Array | string | number | Buffer;
+type Input = string | number | Buffer;
 
 type UnionRange<
   N = 37,
@@ -11,7 +11,7 @@ type UnionRange<
 export function hasch(input: Input, options?: {
   seed?: number
   base?: 0
-}): number;
+}): bigint;
 
 export function hasch(input: Input, options: {
   seed?: number
@@ -32,15 +32,11 @@ export function hasch(
   } = {}
 ) {
   if (typeof input === 'string')
-    input = new TextEncoder().encode(input);
-
+    input = Buffer.from(input);
   else if (typeof input === 'number')
     input = Buffer.from([...Array(Math.floor(input / 0xff)).fill(0xff), input % 0xff]);
 
-  else if (Buffer.isBuffer(input))
-    input = new Uint8Array(input);
-
-  const hash = xxh32(input, seed);
+  const hash = xxh128(input, BigInt(seed));
 
   if (base !== 0) {
     let str = hash.toString(base);
