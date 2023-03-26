@@ -35,7 +35,7 @@ export function hasch(
     input = new TextEncoder().encode(input);
 
   else if (typeof input === 'number')
-    input = new Uint8Array([input]);
+    input = Buffer.from([...Array(Math.floor(input / 0xff)).fill(0xff), input % 0xff]);
 
   else if (Buffer.isBuffer(input))
     input = new Uint8Array(input);
