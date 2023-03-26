@@ -1,6 +1,7 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
 type Input = string | number | Buffer;
+type Seed = number | bigint;
 
 type UnionRange<
   N = 37,
@@ -9,12 +10,12 @@ type UnionRange<
   (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>)
 
 export function hasch(input: Input, options?: {
-  seed?: number
+  seed?: Seed
   base?: 0
 }): bigint;
 
 export function hasch(input: Input, options: {
-  seed?: number
+  seed?: Seed
   base: Exclude<UnionRange, 0>
   length?: number
 }): string;
@@ -26,7 +27,7 @@ export function hasch(
     base = 0,
     length
   }: {
-    seed?: number
+    seed?: Seed
     base?: number
     length?: number
   } = {}

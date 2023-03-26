@@ -1,12 +1,13 @@
 /// <reference types="node" resolution-mode="require"/>
-type Input = Uint8Array | string | number | Buffer;
+type Input = string | number | Buffer;
+type Seed = number | bigint;
 type UnionRange<N = 37, Result extends Array<unknown> = []> = (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>);
 export declare function hasch(input: Input, options?: {
-    seed?: number;
+    seed?: Seed;
     base?: 0;
-}): number;
+}): bigint;
 export declare function hasch(input: Input, options: {
-    seed?: number;
+    seed?: Seed;
     base: Exclude<UnionRange, 0>;
     length?: number;
 }): string;
