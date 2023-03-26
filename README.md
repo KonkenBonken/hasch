@@ -19,25 +19,22 @@ npm i hasch
 ```ts
 import hasch from 'hasch'
 
-hasch(new Uint8Array(123))             === 1794723560
-hasch('abc')                           === 852579327
-hasch(123)                             === 286822908
-hasch(Buffer.alloc(5))                 === 311775565
+  hasch(new Uint8Array(123))             === 328550458801291844070341966987876531409n,
+  hasch('abc')                           ===   30216508460253319331260144576202890925n
+  hasch(123)                             === 235074070585844934564733336785530021059n
+  hasch(Buffer.alloc(5))                 === 82223369041381735457708905440885830446n
 
-hasch('abc', { seed: 123 })            === 2274156986 
-hasch('abc', { seed: 246 })            === 2420894577
+  hasch('abc', { seed: 123 })            === 266221380790302914276811936392392262090n
+  hasch('abc', { seed: 246 })            === 268273496397672601563576200830246633940n
 
-hasch('abc', { base: 0 })              === 852579327
-hasch('abc', { base: 2 })              === "110010110100010101001111111111"
-hasch('abc', { base: 3 })              === "2012102021111222010"
-hasch('abc', { base: 36 })             === "e3lqf3"
-hasch('abc', { base: 36, seed: 1000 }) === "wl0nhd"
+  hasch('abc', { base: 8 })              === "265667634335613025344536104026336337257255"
+  hasch('abc', { base: 12 })             === "617b98437b43184529042060a7607120125"
+  hasch('abc', { base: 36 })             === "1cg66nyuy96rto54mr28cm84t"
+  hasch('abc', { base: 36, seed: 1000 }) === "7v1fb64sz40yaulnbbn5uogpr"
 
-hasch('abc', { base: 36, length: 1 })  === "e"
-hasch('abc', { base: 36, length: 6 })  === "e3lqf3"
-hasch('abc', { base: 36, length: 10 }) === "0000e3lqf3"
-hasch('abc', { base: 36, length: 16 }) === "0000000000e3lqf3"
-
+  hasch('abc', { base: 36, length: 6 })  === "1cg66n"
+  hasch('abc', { base: 36, length: 20 }) === "1cg66nyuy96rto54mr28"
+  hasch('abc', { base: 36, length: 30 }) === "000001cg66nyuy96rto54mr28cm84t"
 ```
 
 ## Author
