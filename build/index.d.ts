@@ -2,10 +2,6 @@
 type Input = string | number | Buffer;
 type Seed = number | bigint;
 type UnionRange<N = 37, Result extends Array<unknown> = []> = (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>);
-export declare function hasch(input: Input, options: {
-    seed?: Seed;
-    decimal: true;
-}): number;
 export declare function hasch(input: Input, options?: {
     seed?: Seed;
     base?: 0;
@@ -17,4 +13,8 @@ export declare function hasch(input: Input, options: {
     length?: number;
     decimal?: false;
 }): string;
+export declare function hasch(input: Input, options: {
+    seed?: Seed;
+    decimal: true;
+}): number;
 export default hasch;
