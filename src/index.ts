@@ -11,13 +11,20 @@ type UnionRange<
 
 export function hasch(input: Input, options?: {
   seed?: Seed
-  base?: 0
+  decimal: true
+}): number;
+
+export function hasch(input: Input, options?: {
+  seed?: Seed
+  base?: 0,
+  decimal?: false
 }): bigint;
 
 export function hasch(input: Input, options: {
   seed?: Seed
   base: Exclude<UnionRange, 0>
-  length?: number
+  length?: number,
+  decimal?: false
 }): string;
 
 export function hasch(
@@ -25,11 +32,13 @@ export function hasch(
   {
     seed = 0,
     base = 0,
-    length
+    length,
+    decimal = false
   }: {
     seed?: Seed
     base?: number
-    length?: number
+    length?: number,
+    decimal?: boolean
   } = {}
 ) {
   if (typeof input === 'string')
@@ -44,6 +53,11 @@ export function hasch(
     if (length !== undefined)
       str = str.padStart(length, '0').slice(0, length);
     return str;
+  }
+
+  if (decimal) {
+    const dec = +hash.toString().slice(-16) / 1e16;
+    return dec;
   }
 
   return hash;

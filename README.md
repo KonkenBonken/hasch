@@ -35,6 +35,8 @@ import hasch from 'hasch'
   hasch('abc', { base: 36, length: 6 })  === "1cg66n"
   hasch('abc', { base: 36, length: 20 }) === "1cg66nyuy96rto54mr28"
   hasch('abc', { base: 36, length: 30 }) === "000001cg66nyuy96rto54mr28cm84t"
+
+  hasch('abc', { decimal: true })        === 0.0144576202890925
 ```
 
 ## Author
