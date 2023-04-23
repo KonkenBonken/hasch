@@ -9,7 +9,7 @@ type UnionRange<
 > =
   (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>)
 
-export function hasch(input: Input, options?: {
+export function hasch(input: Input, options: {
   seed?: Seed
   decimal: true
 }): number;
