@@ -27,18 +27,25 @@ export function hasch(input: Input, options: {
   decimal: true
 }): number;
 
-export function hasch(
+export function hasch<T>(input: Input, options: {
+  seed?: Seed
+  choose: T[]
+}): T;
+
+export function hasch<T>(
   input: Input,
   {
     seed = 0,
     base = 0,
     length,
-    decimal = false
+    decimal = false,
+    choose
   }: {
     seed?: Seed
     base?: number
-    length?: number,
+    length?: number
     decimal?: boolean
+    choose?: T[]
   } = {}
 ) {
   if (typeof input === 'string')
@@ -55,9 +62,13 @@ export function hasch(
     return str;
   }
 
-  if (decimal) {
+  if (decimal || choose) {
     const dec = +hash.toString().slice(-16) / 1e16;
-    return dec;
+
+    if (decimal)
+      return dec;
+    if (choose)
+      return choose[Math.floor(dec * choose.length)];
   }
 
   return hash;

@@ -1,5 +1,5 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
-export function hasch(input, { seed = 0, base = 0, length, decimal = false } = {}) {
+export function hasch(input, { seed = 0, base = 0, length, decimal = false, choose } = {}) {
     if (typeof input === 'string')
         input = Buffer.from(input);
     else if (typeof input === 'number')
@@ -11,9 +11,12 @@ export function hasch(input, { seed = 0, base = 0, length, decimal = false } = {
             str = str.padStart(length, '0').slice(0, length);
         return str;
     }
-    if (decimal) {
+    if (decimal || choose) {
         const dec = +hash.toString().slice(-16) / 1e16;
-        return dec;
+        if (decimal)
+            return dec;
+        if (choose)
+            return choose[Math.floor(dec * choose.length)];
     }
     return hash;
 }

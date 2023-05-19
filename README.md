@@ -19,7 +19,7 @@ npm i hasch
 ```ts
 import hasch from 'hasch'
 
-  hasch(new Uint8Array(123))             === 328550458801291844070341966987876531409n,
+  hasch(new Uint8Array(123))             === 328550458801291844070341966987876531409n
   hasch('abc')                           === 30216508460253319331260144576202890925n
   hasch(123)                             === 235074070585844934564733336785530021059n
   hasch(Buffer.alloc(5))                 === 82223369041381735457708905440885830446n
@@ -37,6 +37,7 @@ import hasch from 'hasch'
   hasch('abc', { base: 36, length: 30 }) === "000001cg66nyuy96rto54mr28cm84t"
 
   hasch('abc', { decimal: true })        === 0.0144576202890925
+  hasch('abc', { choose: [2, 4, 'a'] })  === 2
 ```
 
 ## Author

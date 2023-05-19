@@ -17,4 +17,8 @@ export declare function hasch(input: Input, options: {
     seed?: Seed;
     decimal: true;
 }): number;
+export declare function hasch<T>(input: Input, options: {
+    seed?: Seed;
+    choose: T[];
+}): T;
 export default hasch;
