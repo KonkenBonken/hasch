@@ -1,0 +1,17 @@
+{
+  "name": "zeeded",
+  "version": "1.0.1",
+  "description": "Simple and type-safe seeded random function",
+  "type": "module",
+  "keywords": [
+    "seeded random",
+    "seed",
+    "random",
+    "hasch"
+  ],
+  "author": "Konrad Pettersson <konrad05pettersson@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "hasch": "^3.2.0"
+  }
+}
