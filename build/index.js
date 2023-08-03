@@ -21,4 +21,3 @@ export function hasch(input, { seed = 0, base = 0, length, decimal = false, choo
     return hash;
 }
 export default hasch;
-//# sourceMappingURL=index.js.map
