@@ -1,0 +1,20 @@
+{
+  "name": "zeeded-choose",
+  "version": "1.0.0",
+  "description": "Simple and type-safe seeded choose function",
+  "type": "module",
+  "keywords": [
+    "seeded choose",
+    "seed",
+    "choose",
+    "choice",
+    "select",
+    "random",
+    "hasch"
+  ],
+  "author": "Konrad Pettersson <konrad05pettersson@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "hasch": "^3.2.0"
+  }
+}
