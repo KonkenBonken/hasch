@@ -1,6 +1,6 @@
 {
   "name": "zeeded-choose",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple and type-safe seeded choose function",
   "type": "module",
   "keywords": [

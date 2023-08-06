@@ -45,7 +45,7 @@ import hasch from 'hasch'
 👤 **Konrad Pettersson**
 
 - Github: [`KonkenBonken`](https://github.com/KonkenBonken)
-- LinkedIn: [`Konrad Pettersson`](https://linkedin.com/in/konrad-pettersson-167144206)
+- LinkedIn: [`Konrad Pettersson`](https://linkedin.com/in/konrad-pettersson)
 - Discord: `KonkenBonken#1337`
 
 ## 🤝 Contributing
