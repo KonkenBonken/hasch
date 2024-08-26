@@ -1,6 +1,6 @@
 /// <reference types="node" resolution-mode="require"/>
-type Input = string | number | Buffer;
-type Seed = number | bigint;
+type Input = string | number | Buffer | boolean;
+type Seed = number | bigint | boolean;
 type UnionRange<N = 37, Result extends Array<unknown> = []> = (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>);
 export declare function hasch(input: Input, options?: {
     seed?: Seed;

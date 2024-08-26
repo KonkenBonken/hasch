@@ -1,7 +1,7 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
-type Input = string | number | Buffer;
-type Seed = number | bigint;
+type Input = string | number | Buffer | boolean;
+type Seed = number | bigint | boolean;
 
 type UnionRange<
   N = 37,
@@ -48,6 +48,11 @@ export function hasch<T>(
     choose?: T[]
   } = {}
 ) {
+  if (typeof input === 'boolean')
+    input = input ? '__true' : '__false';
+  if (typeof seed === 'boolean')
+    seed = seed ? 466n : 811n;
+
   if (typeof input === 'string')
     input = Buffer.from(input);
   else if (typeof input === 'number')
