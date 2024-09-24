@@ -1,6 +1,6 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
-type Input = string | number | Buffer | boolean;
+type Input = string | number | Buffer | boolean | Input[];
 type Seed = number | bigint | boolean;
 
 type UnionRange<
@@ -48,6 +48,9 @@ export function hasch<T>(
     choose?: T[]
   } = {}
 ) {
+  if (Array.isArray(input))
+    input = input.map(item => hasch(item, { base: 36 })).join();
+
   if (typeof input === 'boolean')
     input = input ? '__true' : '__false';
   if (typeof seed === 'boolean')
