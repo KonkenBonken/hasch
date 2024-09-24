@@ -1,6 +1,6 @@
 {
   "name": "hasch",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Simple and versatile hash function",
   "main": "build/index.js",
   "files": [
@@ -13,6 +13,7 @@
     "xxhash"
   ],
   "author": "Konrad Pettersson <konrad05pettersson@gmail.com>",
+  "repository": "github:KonkenBonken/hasch",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.15.5",
