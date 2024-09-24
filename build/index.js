@@ -1,5 +1,8 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
-function toBuffer(input) {
+function bufferToBigint(buffer) {
+    return BigInt(`0x${buffer.toString("hex")}`);
+}
+function inputToBuffer(input) {
     if (typeof input === 'boolean')
         input = input ? '__true' : '__false';
     if (typeof input === 'bigint')
@@ -13,11 +16,12 @@ function toBuffer(input) {
 export function hasch(input, { seed = 0, base = 0, length, decimal = false, choose } = {}) {
     if (Array.isArray(input))
         input = input.map(item => hasch(item, { base: 36 })).join();
-    input = toBuffer(input);
-    if (typeof seed === 'boolean')
-        seed = seeog([input, seed])
-
-    const hash = xxh128(input, BigInt(seed));
+    if (Array.isArray(seed))
+        seed = seed.map(item => hasch(item, { base: 36 })).join();
+    input = inputToBuffer(input);
+    if (typeof seed !== 'bigint')
+        seed = bufferToBigint(inputToBuffer(seed));
+    const hash = xxh128(input, seed);
     if (base !== 0) {
         let str = hash.toString(base);
         if (length !== undefined)
