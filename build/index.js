@@ -1,15 +1,22 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
+function toBuffer(input) {
+    if (typeof input === 'boolean')
+        input = input ? '__true' : '__false';
+    if (typeof input === 'bigint')
+        input = input.toString(36);
+    if (typeof input === 'string')
+        return Buffer.from(input);
+    if (typeof input === 'number')
+        return Buffer.from([...Array(Math.floor(input / 0xff)).fill(0xff), input % 0xff]);
+    return input;
+}
 export function hasch(input, { seed = 0, base = 0, length, decimal = false, choose } = {}) {
     if (Array.isArray(input))
         input = input.map(item => hasch(item, { base: 36 })).join();
-    if (typeof input === 'boolean')
-        input = input ? '__true' : '__false';
+    input = toBuffer(input);
     if (typeof seed === 'boolean')
-        seed = seed ? 466n : 811n;
-    if (typeof input === 'string')
-        input = Buffer.from(input);
-    else if (typeof input === 'number')
-        input = Buffer.from([...Array(Math.floor(input / 0xff)).fill(0xff), input % 0xff]);
+        seed = seeog([input, seed])
+
     const hash = xxh128(input, BigInt(seed));
     if (base !== 0) {
         let str = hash.toString(base);

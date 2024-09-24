@@ -7,6 +7,7 @@
   "root": true,
   "rules": {
     "import/no-anonymous-default-export": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "semi": "warn",
     "semi-spacing": "warn",
     "semi-style": "warn",
