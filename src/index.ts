@@ -1,8 +1,8 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
-type Input = string | number | Buffer | boolean | bigint | Input[];
+export type Input = string | number | Buffer | boolean | bigint | Input[];
 
-type UnionRange<
+export type UnionRange<
   N = 37,
   Result extends Array<unknown> = [],
 > =

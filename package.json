@@ -1,11 +1,33 @@
 {
   "name": "hasch",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "Simple and versatile hash function",
   "main": "build/index.js",
   "files": [
     "build/"
   ],
+  "exports": {
+    ".": {
+      "default": "./build/index.js",
+      "types": "./build/index.d.ts"
+    },
+    "./bigint": {
+      "default": "./build/bigint.js",
+      "types": "./build/bigint.d.ts"
+    },
+    "./choose": {
+      "default": "./build/choose.js",
+      "types": "./build/choose.d.ts"
+    },
+    "./decimal": {
+      "default": "./build/decimal.js",
+      "types": "./build/decimal.d.ts"
+    },
+    "./string": {
+      "default": "./build/string.js",
+      "types": "./build/string.d.ts"
+    }
+  },
   "types": "build/index.d.ts",
   "type": "module",
   "keywords": [
