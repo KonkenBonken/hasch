@@ -1,6 +1,6 @@
 {
   "name": "zeeded",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Simple and type-safe seeded random function",
   "type": "module",
   "keywords": [
@@ -12,6 +12,6 @@
   "author": "Konrad Pettersson <konrad05pettersson@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "hasch": "^3.2.0"
+    "hasch": "^4.1.1"
   }
 }

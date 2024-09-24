@@ -1,4 +1,4 @@
 /// <reference types="node" resolution-mode="require"/>
-type Input = string | number | Buffer;
-export declare function Zeeded(seed: Input): number
+import hasch from "hasch";
+export declare function Zeeded(seed: Parameters<typeof hasch>[0]): number
 export default Zeeded;

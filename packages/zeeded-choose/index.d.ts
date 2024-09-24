@@ -1,4 +1,4 @@
 /// <reference types="node" resolution-mode="require"/>
-type Input = string | number | Buffer;
-export declare function zeededChoose<T>(seed: Input, list: T[]): T;
+import hasch from "hasch";
+export declare function zeededChoose<T>(seed: Parameters<typeof hasch>[0], list: T[]): T;
 export default zeededChoose;
