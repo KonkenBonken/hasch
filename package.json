@@ -1,12 +1,23 @@
 {
   "name": "hasch",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "Simple and versatile hash function",
-  "main": "build/index.js",
+  "scripts": {
+    "build": "rm -rf ./build && tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json"
+  },
+  "main": "./build/esm/index.js",
+  "exports": {
+    ".": {
+      "types": "./build/types/index.d.ts",
+      "require": "./build/cjs/index.js",
+      "import": "./build/esm/index.js",
+      "default": "./build/esm/index.js"
+    }
+  },
   "files": [
     "build/"
   ],
-  "types": "build/index.d.ts",
+  "types": "./build/types/index.d.ts",
   "type": "module",
   "keywords": [
     "hash",
