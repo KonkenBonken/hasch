@@ -51,7 +51,7 @@ export function hasch<T>(
   if (typeof input === 'boolean')
     input = input ? '__true' : '__false';
   if (typeof seed === 'boolean')
-    seed = seed ? 466 : 811;
+    seed = seed ? 466n : 811n;
 
   if (typeof input === 'string')
     input = Buffer.from(input);

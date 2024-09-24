@@ -9,6 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
     "sourceMap": false,
-    "moduleResolution": "NodeNext"
+    "declaration": true,
+    "outDir": "build"
   }
 }
