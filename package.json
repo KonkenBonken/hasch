@@ -1,6 +1,6 @@
 {
   "name": "hasch",
-  "version": "4.6.0",
+  "version": "4.6.1",
   "description": "Simple and versatile hash function",
   "main": "build/index.js",
   "files": [
@@ -26,6 +26,10 @@
     "./string": {
       "default": "./build/string.js",
       "types": "./build/string.d.ts"
+    },
+    "./shuffle": {
+      "default": "./build/shuffle.js",
+      "types": "./build/shuffle.d.ts"
     }
   },
   "types": "build/index.d.ts",
