@@ -1,6 +1,6 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
-export type Input = string | number | Buffer | boolean | bigint | Input[];
+export type Input = string | number | Buffer | boolean | bigint | undefined | null | Input[];
 
 export type UnionRange<
   N = 37,
@@ -13,6 +13,9 @@ function bufferToBigint(buffer: Buffer): bigint {
 }
 
 function inputToBuffer(input: Exclude<Input, any[]>): Buffer {
+  if (input === undefined || input === null)
+    input = '' + input;
+
   if (typeof input === 'boolean')
     input = input ? '__true' : '__false';
 
