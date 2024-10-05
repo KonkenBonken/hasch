@@ -12,8 +12,6 @@ function inputToSingle(input) {
 function inputToBuffer(input) {
     if (Buffer.isBuffer(input))
         return input;
-    if (typeof input === 'number')
-        return Buffer.from([...Array(Math.floor(input / 0xff)).fill(0xff), input % 0xff]);
     return Buffer.from('' + input);
 }
 export function hasch(input, { seed = 0, base = 0, length, decimal = false, choose } = {}) {
