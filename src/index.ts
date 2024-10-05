@@ -13,22 +13,13 @@ function bufferToBigint(buffer: Buffer): bigint {
 }
 
 function inputToBuffer(input: Exclude<Input, any[]>): Buffer {
-  if (input === undefined || input === null)
-    input = '' + input;
-
-  if (typeof input === 'boolean')
-    input = input ? '__true' : '__false';
-
-  if (typeof input === 'bigint')
-    input = input.toString(36);
-
-  if (typeof input === 'string')
-    return Buffer.from(input);
+  if (Buffer.isBuffer(input))
+    return input;
 
   if (typeof input === 'number')
     return Buffer.from([...Array(Math.floor(input / 0xff)).fill(0xff), input % 0xff]);
 
-  return input;
+  return Buffer.from('' + input);
 }
 
 export function hasch(input: Input, options?: {
