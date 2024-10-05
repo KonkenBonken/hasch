@@ -1,6 +1,6 @@
 {
   "name": "hasch",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Simple and versatile hash function",
   "main": "build/index.js",
   "files": [
@@ -8,28 +8,28 @@
   ],
   "exports": {
     ".": {
-      "default": "./build/index.js",
-      "types": "./build/index.d.ts"
+      "types": "./build/index.d.ts",
+      "default": "./build/index.js"
     },
     "./bigint": {
-      "default": "./build/bigint.js",
-      "types": "./build/bigint.d.ts"
+      "types": "./build/bigint.d.ts",
+      "default": "./build/bigint.js"
     },
     "./choose": {
-      "default": "./build/choose.js",
-      "types": "./build/choose.d.ts"
+      "types": "./build/choose.d.ts",
+      "default": "./build/choose.js"
     },
     "./decimal": {
-      "default": "./build/decimal.js",
-      "types": "./build/decimal.d.ts"
+      "types": "./build/decimal.d.ts",
+      "default": "./build/decimal.js"
     },
     "./string": {
-      "default": "./build/string.js",
-      "types": "./build/string.d.ts"
+      "types": "./build/string.d.ts",
+      "default": "./build/string.js"
     },
     "./shuffle": {
-      "default": "./build/shuffle.js",
-      "types": "./build/shuffle.d.ts"
+      "types": "./build/shuffle.d.ts",
+      "default": "./build/shuffle.js"
     }
   },
   "types": "build/index.d.ts",
