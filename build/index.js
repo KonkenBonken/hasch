@@ -14,6 +14,10 @@ export function hasch(input, { seed = 0, base = 0, length, decimal = false, choo
         input = input.map(item => hasch(item, { base: 36 })).join();
     if (Array.isArray(seed))
         seed = seed.map(item => hasch(item, { base: 36 })).join();
+    if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
+        input = hasch(Object.entries(input), { base: 36 });
+    if (typeof seed === 'object' && seed !== null && !Buffer.isBuffer(seed))
+        seed = hasch(Object.entries(seed), { base: 36 });
     input = inputToBuffer(input);
     if (typeof seed !== 'bigint')
         seed = bufferToBigint(inputToBuffer(seed));
