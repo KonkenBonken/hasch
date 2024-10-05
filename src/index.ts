@@ -13,6 +13,16 @@ function bufferToBigint(buffer: Buffer): bigint {
   return BigInt(`0x${buffer.toString("hex")}`);
 }
 
+function inputToSingle<I extends Input>(input: I): SingleInput {
+  if (Array.isArray(input))
+    return input.map(item => hasch(item, { base: 36 })).join();
+
+  if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
+    return hasch(Object.entries(input), { base: 36 });
+
+  return input;
+}
+
 function inputToBuffer(input: SingleInput): Buffer {
   if (Buffer.isBuffer(input))
     return input;
@@ -62,15 +72,8 @@ export function hasch<T>(
     choose?: T[]
   } = {}
 ) {
-  if (Array.isArray(input))
-    input = input.map(item => hasch(item, { base: 36 })).join();
-  if (Array.isArray(seed))
-    seed = seed.map(item => hasch(item, { base: 36 })).join();
-
-  if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
-    input = hasch(Object.entries(input), { base: 36 });
-  if (typeof seed === 'object' && seed !== null && !Buffer.isBuffer(seed))
-    seed = hasch(Object.entries(seed), { base: 36 });
+  input = inputToSingle(input);
+  seed = inputToSingle(seed) ?? null;
 
   input = inputToBuffer(input);
 

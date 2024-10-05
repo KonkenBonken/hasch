@@ -2,6 +2,13 @@ import { XXH3_128 as xxh128 } from 'xxh3-ts';
 function bufferToBigint(buffer) {
     return BigInt(`0x${buffer.toString("hex")}`);
 }
+function inputToSingle(input) {
+    if (Array.isArray(input))
+        return input.map(item => hasch(item, { base: 36 })).join();
+    if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
+        return hasch(Object.entries(input), { base: 36 });
+    return input;
+}
 function inputToBuffer(input) {
     if (Buffer.isBuffer(input))
         return input;
@@ -10,14 +17,8 @@ function inputToBuffer(input) {
     return Buffer.from('' + input);
 }
 export function hasch(input, { seed = 0, base = 0, length, decimal = false, choose } = {}) {
-    if (Array.isArray(input))
-        input = input.map(item => hasch(item, { base: 36 })).join();
-    if (Array.isArray(seed))
-        seed = seed.map(item => hasch(item, { base: 36 })).join();
-    if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
-        input = hasch(Object.entries(input), { base: 36 });
-    if (typeof seed === 'object' && seed !== null && !Buffer.isBuffer(seed))
-        seed = hasch(Object.entries(seed), { base: 36 });
+    input = inputToSingle(input);
+    seed = inputToSingle(seed) ?? null;
     input = inputToBuffer(input);
     if (typeof seed !== 'bigint')
         seed = bufferToBigint(inputToBuffer(seed));
