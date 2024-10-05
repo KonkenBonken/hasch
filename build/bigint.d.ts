@@ -1,2 +1,2 @@
 import { Input } from './index.js';
-export default function haschBigint(input: Input): bigint;
+export default function haschBigint(...input: Input[]): bigint;
