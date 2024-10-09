@@ -2,7 +2,7 @@
 type SingleInput = string | number | Buffer | boolean | bigint | undefined | null;
 export type Input = SingleInput | {
     [key: string]: Input;
-} | Input[];
+} | Map<SingleInput, SingleInput> | Input[];
 export type UnionRange<N = 37, Result extends Array<unknown> = []> = (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>);
 export declare function hasch(input: Input, options?: {
     seed?: Input;

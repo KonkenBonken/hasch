@@ -1,7 +1,7 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
 type SingleInput = string | number | Buffer | boolean | bigint | undefined | null;
-export type Input = SingleInput | { [key: string]: Input } | Input[];
+export type Input = SingleInput | { [key: string]: Input } | Map<SingleInput, SingleInput> | Input[];
 
 export type UnionRange<
   N = 37,
@@ -13,9 +13,12 @@ function bufferToBigint(buffer: Buffer): bigint {
   return BigInt(`0x${buffer.toString("hex")}`);
 }
 
-function inputToSingle<I extends Input>(input: I): SingleInput {
+function inputToSingle(input: Input): SingleInput {
   if (Array.isArray(input))
     return input.map(item => hasch(item, { base: 36 })).join();
+
+  if (input instanceof Map)
+    return hasch(Array.from(input.entries()), { base: 36 });
 
   if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
     return hasch(Object.entries(input), { base: 36 });

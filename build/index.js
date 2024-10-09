@@ -5,6 +5,8 @@ function bufferToBigint(buffer) {
 function inputToSingle(input) {
     if (Array.isArray(input))
         return input.map(item => hasch(item, { base: 36 })).join();
+    if (input instanceof Map)
+        return hasch(Array.from(input.entries()), { base: 36 });
     if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
         return hasch(Object.entries(input), { base: 36 });
     return input;
