@@ -1,7 +1,7 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
 type SingleInput = string | number | Buffer | boolean | bigint | undefined | null;
-export type Input = SingleInput | { [key: string]: Input } | Map<SingleInput, SingleInput> | Input[];
+export type Input = SingleInput | { [key: string]: Input } | Map<SingleInput, SingleInput> | Set<SingleInput> | Input[];
 
 export type UnionRange<
   N = 37,
@@ -19,6 +19,9 @@ function inputToSingle(input: Input): SingleInput {
 
   if (input instanceof Map)
     return hasch(Array.from(input.entries()), { base: 36 });
+
+  if (input instanceof Set)
+    return hasch(Array.from(input), { base: 36 });
 
   if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
     return hasch(Object.entries(input), { base: 36 });
