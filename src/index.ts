@@ -1,7 +1,7 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
 type SingleInput = string | number | Buffer | boolean | bigint | undefined | null;
-export type Input = SingleInput | { [key: string]: Input } | Map<SingleInput, SingleInput> | Set<SingleInput> | Input[];
+export type Input = SingleInput | { [key: string]: Input } | Map<Input, Input> | Set<Input> | Input[];
 
 export type UnionRange<
   N = 37,
