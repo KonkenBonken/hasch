@@ -4,13 +4,13 @@ function bufferToBigint(buffer) {
 }
 function inputToSingle(input) {
     if (Array.isArray(input))
-        return input.map(item => hasch(item, { base: 36 })).join();
+        return input.map(item => hasch(item, { base: 36, seed: 1n })).join();
     if (input instanceof Map)
-        return hasch(Array.from(input.entries()), { base: 36 });
+        return hasch(Array.from(input.entries()), { base: 36, seed: 2n });
     if (input instanceof Set)
-        return hasch(Array.from(input), { base: 36 });
+        return hasch(Array.from(input), { base: 36, seed: 3n });
     if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
-        return hasch(Object.entries(input), { base: 36 });
+        return hasch(Object.entries(input), { base: 36, seed: 4n });
     return input;
 }
 function inputToBuffer(input) {
@@ -18,7 +18,7 @@ function inputToBuffer(input) {
         return input;
     if (input instanceof Date)
         input = input.toISOString();
-    return Buffer.from('' + input);
+    return Buffer.from('' + input + typeof input);
 }
 export function hasch(input, { seed = 0, base = 0, length, decimal = false, choose } = {}) {
     input = inputToSingle(input);

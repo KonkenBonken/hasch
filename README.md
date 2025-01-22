@@ -19,28 +19,29 @@ npm i hasch
 ```ts
 import hasch from 'hasch'
 
-  hasch(new Uint8Array(123))             === 328550458801291844070341966987876531409n
-  hasch('abc')                           === 30216508460253319331260144576202890925n
-  hasch(123)                             === 235074070585844934564733336785530021059n
-  hasch(Buffer.alloc(5))                 === 82223369041381735457708905440885830446n
-  hasch(true)                            === 129586033332163723210720888541521643413n
-  hasch(123456n)                         === 119496419377441039288992112134123105220n
-  hasch(['abc', 123, false])             === 193760823540270795509769687241903930102n
+  hasch(new Uint8Array(123))             === 329235993716377293806186649522918669518n
+  hasch('abc')                           === 133147771053349843105193998924167742055n
+  hasch(123)                             === 283825537867327248663696416593378114023n
+  hasch(Buffer.alloc(5))                 === 49955116314016825874015941403329333188n
+  hasch(true)                            === 150479606365948793785668837958725443536n
+  hasch(123456n)                         === 130319799601172616329867553786126566458n
+  hasch(new Date('2025-01-25'))          === 168775973375590997000841845937227583553n
+  hasch(['abc', 123, false])             === 235420182704928267424669892444899362043n
 
-  hasch('abc', { seed: 123 })            === 266221380790302914276811936392392262090n
-  hasch('abc', { seed: 246 })            === 268273496397672601563576200830246633940n
+  hasch('abc', { seed: 123 })            === 230655312275973925400513608974157726309n
+  hasch('abc', { seed: 246 })            === 26379508875920428830785225613316203014n
 
-  hasch('abc', { base: 8 })              === "265667634335613025344536104026336337257255"
-  hasch('abc', { base: 12 })             === "617b98437b43184529042060a7607120125"
-  hasch('abc', { base: 36 })             === "1cg66nyuy96rto54mr28cm84t"
-  hasch('abc', { base: 36, seed: 1000 }) === "7v1fb64sz40yaulnbbn5uogpr"
+  hasch('abc', { base: 8 })              === "1441265176316106065623406146045754755701147"
+  hasch('abc', { base: 12 })             === "23072a38617845a94b582603a58a74532a5b"
+  hasch('abc', { base: 36 })             === "5xhmays320jqdv61tkom583tz"
+  hasch('abc', { base: 36, seed: 1000 }) === "2el74yy3285v3dn329gt019bh"
 
-  hasch('abc', { base: 36, length: 6 })  === "1cg66n"
-  hasch('abc', { base: 36, length: 20 }) === "1cg66nyuy96rto54mr28"
-  hasch('abc', { base: 36, length: 30 }) === "000001cg66nyuy96rto54mr28cm84t"
+  hasch('abc', { base: 36, length: 6 })  === "5xhmay"
+  hasch('abc', { base: 36, length: 20 }) === "5xhmays320jqdv61tkom"
+  hasch('abc', { base: 36, length: 30 }) === "000005xhmays320jqdv61tkom583tz"
 
-  hasch('abc', { decimal: true })        === 0.0144576202890925
-  hasch('abc', { choose: [2, 4, 'a'] })  === 2
+  hasch('abc', { decimal: true })        === 0.3998924167742055
+  hasch('abc', { choose: [2, 4, 'a'] })  === 4
 ```
 
 ## Author
@@ -49,7 +50,7 @@ import hasch from 'hasch'
 
 - Github: [`KonkenBonken`](https://github.com/KonkenBonken)
 - LinkedIn: [`Konrad Pettersson`](https://linkedin.com/in/konrad-pettersson)
-- Discord: `KonkenBonken#1337`
+- Discord: `KonkenBonken`
 
 ## 🤝 Contributing
 
