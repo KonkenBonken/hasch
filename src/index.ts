@@ -17,7 +17,7 @@ function inputToSingle<I extends Input>(input: I): SingleInput {
   if (Array.isArray(input))
     return input.map(item => hasch(item, { base: 36 })).join();
 
-  if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
+  if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input) && !(input instanceof Date))
     return hasch(Object.entries(input), { base: 36 });
 
   return input;
