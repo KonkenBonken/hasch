@@ -16,6 +16,8 @@ function inputToSingle(input) {
 function inputToBuffer(input) {
     if (Buffer.isBuffer(input))
         return input;
+    if (input instanceof Date)
+        input = input.toISOString();
     return Buffer.from('' + input);
 }
 export function hasch(input, { seed = 0, base = 0, length, decimal = false, choose } = {}) {

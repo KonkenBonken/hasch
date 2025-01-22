@@ -1,5 +1,5 @@
 /// <reference types="node" resolution-mode="require"/>
-type SingleInput = string | number | Buffer | boolean | bigint | undefined | null;
+type SingleInput = string | number | Buffer | boolean | bigint | undefined | null | Date;
 export type Input = SingleInput | {
     [key: string]: Input;
 } | Map<Input, Input> | Set<Input> | Input[];

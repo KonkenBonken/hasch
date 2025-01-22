@@ -1,6 +1,6 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
-type SingleInput = string | number | Buffer | boolean | bigint | undefined | null;
+type SingleInput = string | number | Buffer | boolean | bigint | undefined | null | Date;
 export type Input = SingleInput | { [key: string]: Input } | Map<Input, Input> | Set<Input> | Input[];
 
 export type UnionRange<
@@ -32,6 +32,9 @@ function inputToSingle(input: Input): SingleInput {
 function inputToBuffer(input: SingleInput): Buffer {
   if (Buffer.isBuffer(input))
     return input;
+
+  if (input instanceof Date)
+    input = input.toISOString();
 
   return Buffer.from('' + input);
 }
