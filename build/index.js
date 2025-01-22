@@ -14,6 +14,8 @@ function inputToBuffer(input) {
         return input;
     if (typeof input === 'number')
         return Buffer.from([...Array(Math.floor(input / 0xff)).fill(0xff), input % 0xff]);
+    if (input instanceof Date)
+        input = input.toISOString();
     return Buffer.from('' + input);
 }
 export function hasch(input, { seed = 0, base = 0, length, decimal = false, choose } = {}) {
