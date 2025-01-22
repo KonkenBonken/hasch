@@ -23,7 +23,7 @@ function inputToSingle(input: Input): SingleInput {
   if (input instanceof Set)
     return hasch(Array.from(input), { base: 36, seed: 3n });
 
-  if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
+  if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input) && !(input instanceof RegExp))
     return hasch(Object.entries(input), { base: 36, seed: 4n });
 
   return input;
