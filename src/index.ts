@@ -1,6 +1,6 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
-type Input = string | number | Buffer | boolean | Input[];
+type Input = string | number | Buffer | boolean | bigint | Input[];
 type Seed = number | bigint | boolean;
 
 type UnionRange<
@@ -8,6 +8,22 @@ type UnionRange<
   Result extends Array<unknown> = [],
 > =
   (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>)
+
+function toBuffer(input: Exclude<Input, any[]>): Buffer {
+  if (typeof input === 'boolean')
+    input = input ? '__true' : '__false';
+
+  if (typeof input === 'bigint')
+    input = input.toString(36);
+
+  if (typeof input === 'string')
+    return Buffer.from(input);
+
+  if (typeof input === 'number')
+    return Buffer.from([...Array(Math.floor(input / 0xff)).fill(0xff), input % 0xff]);
+
+  return input;
+}
 
 export function hasch(input: Input, options?: {
   seed?: Seed
@@ -51,15 +67,11 @@ export function hasch<T>(
   if (Array.isArray(input))
     input = input.map(item => hasch(item, { base: 36 })).join();
 
-  if (typeof input === 'boolean')
-    input = input ? '__true' : '__false';
+  input = toBuffer(input);
+
   if (typeof seed === 'boolean')
     seed = seed ? 466n : 811n;
 
-  if (typeof input === 'string')
-    input = Buffer.from(input);
-  else if (typeof input === 'number')
-    input = Buffer.from([...Array(Math.floor(input / 0xff)).fill(0xff), input % 0xff]);
 
   const hash = xxh128(input, BigInt(seed));
 
