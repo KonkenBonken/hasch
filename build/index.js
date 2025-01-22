@@ -9,7 +9,7 @@ function inputToSingle(input) {
         return hasch(Array.from(input.entries()), { base: 36 });
     if (input instanceof Set)
         return hasch(Array.from(input), { base: 36 });
-    if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input))
+    if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input) && !(input instanceof Date))
         return hasch(Object.entries(input), { base: 36 });
     return input;
 }
