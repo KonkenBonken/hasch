@@ -3,13 +3,15 @@ function bufferToBigint(buffer) {
     return BigInt(`0x${buffer.toString("hex")}`);
 }
 function inputToSingle(input) {
+    if (input === null || Buffer.isBuffer(input) || input instanceof RegExp)
+        return input;
     if (Array.isArray(input))
         return input.map(item => hasch(item, { base: 36, seed: 1n })).join();
     if (input instanceof Map)
         return hasch(Array.from(input.entries()), { base: 36, seed: 2n });
     if (input instanceof Set)
         return hasch(Array.from(input), { base: 36, seed: 3n });
-    if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input) && !(input instanceof RegExp))
+    if (typeof input === 'object')
         return hasch(Object.entries(input), { base: 36, seed: 4n });
     return input;
 }

@@ -14,6 +14,9 @@ function bufferToBigint(buffer: Buffer): bigint {
 }
 
 function inputToSingle(input: Input): SingleInput {
+  if (input === null || Buffer.isBuffer(input) || input instanceof RegExp)
+    return input;
+
   if (Array.isArray(input))
     return input.map(item => hasch(item, { base: 36, seed: 1n })).join();
 
@@ -23,7 +26,7 @@ function inputToSingle(input: Input): SingleInput {
   if (input instanceof Set)
     return hasch(Array.from(input), { base: 36, seed: 3n });
 
-  if (typeof input === 'object' && input !== null && !Buffer.isBuffer(input) && !(input instanceof RegExp))
+  if (typeof input === 'object')
     return hasch(Object.entries(input), { base: 36, seed: 4n });
 
   return input;
