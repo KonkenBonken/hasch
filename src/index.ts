@@ -14,7 +14,7 @@ function bufferToBigint(buffer: Buffer): bigint {
 }
 
 function inputToSingle(input: Input): SingleInput {
-  if (input === null || Buffer.isBuffer(input) || input instanceof RegExp || input instanceof Error)
+  if (input === null || Buffer.isBuffer(input) || input instanceof Date || input instanceof RegExp || input instanceof Error)
     return input;
 
   if (Array.isArray(input))
