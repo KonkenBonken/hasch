@@ -1,7 +1,6 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
 type Input = string | number | Buffer | boolean | bigint | Input[];
-type Seed = number | bigint | boolean;
 
 type UnionRange<
   N = 37,
@@ -9,7 +8,11 @@ type UnionRange<
 > =
   (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>)
 
-function toBuffer(input: Exclude<Input, any[]>): Buffer {
+function bufferToBigint(buffer: Buffer): bigint {
+  return BigInt(`0x${buffer.toString("hex")}`);
+}
+
+function inputToBuffer(input: Exclude<Input, any[]>): Buffer {
   if (typeof input === 'boolean')
     input = input ? '__true' : '__false';
 
@@ -26,25 +29,25 @@ function toBuffer(input: Exclude<Input, any[]>): Buffer {
 }
 
 export function hasch(input: Input, options?: {
-  seed?: Seed
+  seed?: Input
   base?: 0,
   decimal?: false
 }): bigint;
 
 export function hasch(input: Input, options: {
-  seed?: Seed
+  seed?: Input
   base: Exclude<UnionRange, 0>
   length?: number,
   decimal?: false
 }): string;
 
 export function hasch(input: Input, options: {
-  seed?: Seed
+  seed?: Input
   decimal: true
 }): number;
 
 export function hasch<T>(input: Input, options: {
-  seed?: Seed
+  seed?: Input
   choose: T[]
 }): T;
 
@@ -57,7 +60,7 @@ export function hasch<T>(
     decimal = false,
     choose
   }: {
-    seed?: Seed
+    seed?: Input
     base?: number
     length?: number
     decimal?: boolean
@@ -66,14 +69,15 @@ export function hasch<T>(
 ) {
   if (Array.isArray(input))
     input = input.map(item => hasch(item, { base: 36 })).join();
+  if (Array.isArray(seed))
+    seed = seed.map(item => hasch(item, { base: 36 })).join();
 
-  input = toBuffer(input);
+  input = inputToBuffer(input);
 
-  if (typeof seed === 'boolean')
-    seed = seed ? 466n : 811n;
+  if (typeof seed !== 'bigint')
+    seed = bufferToBigint(inputToBuffer(seed));
 
-
-  const hash = xxh128(input, BigInt(seed));
+  const hash = xxh128(input, seed);
 
   if (base !== 0) {
     let str = hash.toString(base);
