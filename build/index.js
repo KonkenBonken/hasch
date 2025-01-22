@@ -3,7 +3,7 @@ function bufferToBigint(buffer) {
     return BigInt(`0x${buffer.toString("hex")}`);
 }
 function inputToSingle(input) {
-    if (input === null || Buffer.isBuffer(input) || input instanceof RegExp)
+    if (input === null || Buffer.isBuffer(input) || input instanceof RegExp || input instanceof Error)
         return input;
     if (Array.isArray(input))
         return input.map(item => hasch(item, { base: 36, seed: 1n })).join();
@@ -20,6 +20,8 @@ function inputToBuffer(input) {
         return input;
     if (input instanceof Date)
         input = input.toISOString();
+    if (input instanceof Error)
+        input = input.name + input.message + input.stack;
     return Buffer.from('' + input + typeof input);
 }
 export function hasch(input, { seed = 0, base = 0, length, decimal = false, choose } = {}) {

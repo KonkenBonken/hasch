@@ -1,6 +1,6 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
 
-type SingleInput = string | number | Buffer | boolean | bigint | undefined | null | Date | RegExp;
+type SingleInput = string | number | Buffer | boolean | bigint | undefined | null | Date | RegExp | Error;
 export type Input = SingleInput | { [key: string]: Input } | Map<Input, Input> | Set<Input> | Input[];
 
 export type UnionRange<
@@ -14,7 +14,7 @@ function bufferToBigint(buffer: Buffer): bigint {
 }
 
 function inputToSingle(input: Input): SingleInput {
-  if (input === null || Buffer.isBuffer(input) || input instanceof RegExp)
+  if (input === null || Buffer.isBuffer(input) || input instanceof RegExp || input instanceof Error)
     return input;
 
   if (Array.isArray(input))
@@ -38,6 +38,9 @@ function inputToBuffer(input: SingleInput): Buffer {
 
   if (input instanceof Date)
     input = input.toISOString();
+
+  if (input instanceof Error)
+    input = input.name + input.message + input.stack;
 
   return Buffer.from('' + input + typeof input);
 }
