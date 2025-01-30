@@ -37,10 +37,10 @@ import hasch from 'hasch'
   hasch('abc', { seed: 246 })            === 26379508875920428830785225613316203014n
 
   hasch('abc', { base: 8 })              === "1441265176316106065623406146045754755701147"
-  hasch('abc', { base: 36 })             === "5xhmays320jqdv61tkom583tz"
   hasch('abc', { base: 64 })             === "1AaRfPe8MROs6cMBZDJU9D"
   hasch('abc', { base: 64, length: 6 })  === "1AaRfP"
   hasch('abc', { base: 64, seed: 1000 }) === "EEac4Z0v5fJXv+lnUVbBJ"
+  hasch('abc', { base: '0oOöÖQ' })       === "QQöOQöÖoÖQÖÖÖ0ö0O00öoÖOOoQoo00oÖQöOÖ0öÖ0QoO0öÖQQQ"
 
   hasch('abc', { decimal: true })        === 0.3998924167742055
   hasch('abc', { choose: [2, 4, 'a'] })  === 4

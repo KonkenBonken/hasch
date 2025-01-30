@@ -48,7 +48,7 @@ export function hasch(input: Input, options?: {
 
 export function hasch(input: Input, options: {
   seed?: Input
-  base: number
+  base: number | string
   length?: number,
   decimal?: false
 }): string;
@@ -73,7 +73,7 @@ export function hasch<T>(
     choose
   }: {
     seed?: Input
-    base?: number
+    base?: number | string
     length?: number
     decimal?: boolean
     choose?: T[]
@@ -90,10 +90,11 @@ export function hasch<T>(
   const hash = xxh128(input, seed);
 
   if (base !== 0) {
-    const base62 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/';
-    const base36 = base62.substring(0, 36);
+    const base64 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/';
+    const base36 = base64.substring(0, 36);
+    const alphabet = typeof base === 'string' ? base : base64.substring(0, base);
 
-    const toBase = anyBase(base36, base62.substring(0, base));
+    const toBase = anyBase(base36, alphabet);
 
     let str = toBase(hash.toString(36));
     if (length !== undefined)

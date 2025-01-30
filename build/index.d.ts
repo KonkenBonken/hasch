@@ -10,7 +10,7 @@ export declare function hasch(input: Input, options?: {
 }): bigint;
 export declare function hasch(input: Input, options: {
     seed?: Input;
-    base: number;
+    base: number | string;
     length?: number;
     decimal?: false;
 }): string;
