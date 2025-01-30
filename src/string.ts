@@ -6,8 +6,8 @@ export function haschString(input: Input, options?: { base?: number | string, le
 
 export default function haschString(input: Input, options: number | { base?: number | string, length?: number } = {}) {
   if (typeof options === 'number')
-    return hasch(input, { base: 62, length: options });
+    return hasch(input, { base: Infinity, length: options });
 
-  const { base = 62, length } = options;
+  const { base = Infinity, length } = options;
   return hasch(input, { base, length });
 }

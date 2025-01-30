@@ -33,9 +33,9 @@ export function hasch(input, { seed = 0, base = 0, length, decimal = false, choo
         seed = bufferToBigint(inputToBuffer(seed));
     const hash = xxh128(input, seed);
     if (base !== 0) {
-        const base64 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/';
-        const base36 = base64.substring(0, 36);
-        const alphabet = typeof base === 'string' ? base : base64.substring(0, base);
+        const baseMax = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/-_.~!#$&()*,:;=?@';
+        const base36 = baseMax.substring(0, 36);
+        const alphabet = typeof base === 'string' ? base : baseMax.substring(0, base);
         const toBase = anyBase(base36, alphabet);
         let str = toBase(hash.toString(36));
         if (length !== undefined)
