@@ -1,6 +1,6 @@
 {
   "name": "hasch",
-  "version": "7.4.1",
+  "version": "7.4.2",
   "description": "Simple and versatile hash function",
   "main": "build/index.js",
   "files": [
@@ -42,6 +42,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KonkenBonken/hasch.git"
+  },
+  "engines": {
+    "node": ">=12"
   },
   "license": "ISC",
   "devDependencies": {
