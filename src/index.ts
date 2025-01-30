@@ -4,12 +4,6 @@ import anyBase from 'any-base';
 type SingleInput = string | number | Buffer | boolean | bigint | undefined | null | Date | RegExp | Error;
 export type Input = SingleInput | { [key: string]: Input } | Map<Input, Input> | Set<Input> | Input[];
 
-export type UnionRange<
-  N = 64,
-  Result extends Array<unknown> = [],
-> =
-  (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>)
-
 function bufferToBigint(buffer: Buffer): bigint {
   return BigInt(`0x${buffer.toString("hex")}`);
 }
@@ -54,7 +48,7 @@ export function hasch(input: Input, options?: {
 
 export function hasch(input: Input, options: {
   seed?: Input
-  base: Exclude<UnionRange, 0>
+  base: number
   length?: number,
   decimal?: false
 }): string;
