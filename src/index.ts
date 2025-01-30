@@ -1,10 +1,11 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
+import anyBase from 'any-base';
 
 type SingleInput = string | number | Buffer | boolean | bigint | undefined | null | Date | RegExp | Error;
 export type Input = SingleInput | { [key: string]: Input } | Map<Input, Input> | Set<Input> | Input[];
 
 export type UnionRange<
-  N = 37,
+  N = 64,
   Result extends Array<unknown> = [],
 > =
   (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>)
@@ -95,7 +96,12 @@ export function hasch<T>(
   const hash = xxh128(input, seed);
 
   if (base !== 0) {
-    let str = hash.toString(base);
+    const base62 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/';
+    const base36 = base62.substring(0, 36);
+
+    const toBase = anyBase(base36, base62.substring(0, base));
+
+    let str = toBase(hash.toString(36));
     if (length !== undefined)
       str = str.padStart(length, '0').slice(0, length);
     return str;

@@ -3,7 +3,7 @@ type SingleInput = string | number | Buffer | boolean | bigint | undefined | nul
 export type Input = SingleInput | {
     [key: string]: Input;
 } | Map<Input, Input> | Set<Input> | Input[];
-export type UnionRange<N = 37, Result extends Array<unknown> = []> = (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>);
+export type UnionRange<N = 64, Result extends Array<unknown> = []> = (Result['length'] extends N ? Exclude<Result[number], 1> : UnionRange<N, [...Result, Result['length']]>);
 export declare function hasch(input: Input, options?: {
     seed?: Input;
     base?: 0;

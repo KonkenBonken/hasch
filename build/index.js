@@ -1,4 +1,5 @@
 import { XXH3_128 as xxh128 } from 'xxh3-ts';
+import anyBase from 'any-base';
 function bufferToBigint(buffer) {
     return BigInt(`0x${buffer.toString("hex")}`);
 }
@@ -32,7 +33,10 @@ export function hasch(input, { seed = 0, base = 0, length, decimal = false, choo
         seed = bufferToBigint(inputToBuffer(seed));
     const hash = xxh128(input, seed);
     if (base !== 0) {
-        let str = hash.toString(base);
+        const base62 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/';
+        const base36 = base62.substring(0, 36);
+        const toBase = anyBase(base36, base62.substring(0, base));
+        let str = toBase(hash.toString(36));
         if (length !== undefined)
             str = str.padStart(length, '0').slice(0, length);
         return str;
