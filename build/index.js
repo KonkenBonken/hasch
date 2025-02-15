@@ -39,7 +39,7 @@ export function hasch(input, { seed = 0, base = 0, length, decimal = false, choo
         const toBase = anyBase(base36, alphabet);
         let str = toBase(hash.toString(36));
         if (length !== undefined)
-            str = str.padStart(length, '0').slice(0, length);
+            str = str.padStart(length, '0').slice(-length);
         return str;
     }
     if (decimal || choose) {

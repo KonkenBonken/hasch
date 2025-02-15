@@ -98,7 +98,7 @@ export function hasch<T>(
 
     let str = toBase(hash.toString(36));
     if (length !== undefined)
-      str = str.padStart(length, '0').slice(0, length);
+      str = str.padStart(length, '0').slice(-length);
     return str;
   }
 
